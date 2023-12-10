@@ -14,7 +14,24 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  // transactions - an object like { itemName, category, price, timestamp }.
+  let result = [];
+
+  for (let i = 0; i < transactions.length; i++) {
+    const { category, price } = transactions[i];
+    let tempObj = result.find(obj => obj.category == category);
+    if (tempObj == undefined) {
+      result.push({
+        category: category,
+        totalSpent: price
+      });
+    }
+    else {
+      tempObj.totalSpent += price;
+    }
+  }
+
+  return result;
 }
 
 module.exports = calculateTotalSpentByCategory;
